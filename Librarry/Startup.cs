@@ -59,6 +59,8 @@ namespace Librarry
             {
                 endpoints.MapControllers();
             });
+
+            AppDbInitializer.Seed(app);
         }
     }
 }
