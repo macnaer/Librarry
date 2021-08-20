@@ -14,22 +14,22 @@ namespace Librarry.Data.Services
             _context = context;
         }
 
-        public void AddBook(Book book)
-        {
-            var _book = new Book()
-            {
-                Title = book.Title,
-                Description = book.Description,
-                IsRead = book.IsRead,
-                DateRead = book.DateRead,
-                Rate = book.Rate,
-                Genre = book.Genre,
-                Author = book.Author,
-                ImageURL = book.ImageURL,
-                DateAdded = book.DateAdded,
-            };
-            _context.Books.Add(_book);
-            _context.SaveChanges();
-        }
+        //public void AddBook(Book book)
+        //{
+        //    var _book = new Book()
+        //    {
+        //        Title = book.Title,
+        //        Description = book.Description,
+        //        IsRead = book.IsRead,
+        //        DateRead = book.DateRead,
+        //        Rate = book.Rate,
+        //        Genre = book.Genre,
+        //        Author = book.Author,
+        //        ImageURL = book.ImageURL,
+        //        DateAdded = book.DateAdded,
+        //    };
+        //    _context.Books.Add(_book);
+        //    _context.SaveChanges();
+        //}
     }
 }

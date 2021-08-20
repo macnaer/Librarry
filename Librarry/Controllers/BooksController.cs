@@ -19,11 +19,11 @@ namespace Librarry.Controllers
             _booksService = booksService;
         }
 
-        [HttpPost("add-book")]
-        public IActionResult AddBook([FromBody] Book book)
-        {
-            _booksService.AddBook(book);
-            return Ok();
-        }
+        //[HttpPost("add-book")]
+        //public IActionResult AddBook([FromBody] Book book)
+        //{
+        //    _booksService.AddBook(book);
+        //    return Ok();
+        //}
     }
 }

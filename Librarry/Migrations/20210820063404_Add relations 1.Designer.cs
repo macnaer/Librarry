@@ -4,14 +4,16 @@ using Librarry.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Librarry.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210820063404_Add relations 1")]
+    partial class Addrelations1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,6 +43,9 @@ namespace Librarry.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
 
@@ -59,7 +64,7 @@ namespace Librarry.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PublisherId")
+                    b.Property<int?>("PublisherId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Rate")
@@ -114,13 +119,9 @@ namespace Librarry.Migrations
 
             modelBuilder.Entity("Librarry.Data.Models.Book", b =>
                 {
-                    b.HasOne("Librarry.Data.Models.Publisher", "Publisher")
+                    b.HasOne("Librarry.Data.Models.Publisher", null)
                         .WithMany("Books")
-                        .HasForeignKey("PublisherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Publisher");
+                        .HasForeignKey("PublisherId");
                 });
 
             modelBuilder.Entity("Librarry.Data.Models.Book_Author", b =>
@@ -132,7 +133,7 @@ namespace Librarry.Migrations
                         .IsRequired();
 
                     b.HasOne("Librarry.Data.Models.Book", "Book")
-                        .WithMany("Book_Authors")
+                        .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -143,11 +144,6 @@ namespace Librarry.Migrations
                 });
 
             modelBuilder.Entity("Librarry.Data.Models.Author", b =>
-                {
-                    b.Navigation("Book_Authors");
-                });
-
-            modelBuilder.Entity("Librarry.Data.Models.Book", b =>
                 {
                     b.Navigation("Book_Authors");
                 });
