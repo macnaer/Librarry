@@ -20,6 +20,13 @@ namespace Librarry.Controllers
             _publisherService = publishersService;
         }
 
+        [HttpGet("get-all-publishers")]
+        public IActionResult GetAllPublishers()
+        {
+            var allPublishers = _publisherService.GetAllPublishers();
+            return Ok(allPublishers);
+        }
+
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher([FromBody] PublisherVM publisher)
         {

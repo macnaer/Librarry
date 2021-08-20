@@ -16,6 +16,14 @@ namespace Librarry.Data.Services
             _context = context;
         }
 
+
+        public List<Publisher> GetAllPublishers()
+        {
+            var allPublishers = _context.Publishers.ToList();
+            return allPublishers;
+        }
+
+
         public Publisher AddPublisher(PublisherVM publisher)
         {
             var _publisher = new Publisher()

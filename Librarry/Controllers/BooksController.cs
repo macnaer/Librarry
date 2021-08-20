@@ -1,5 +1,6 @@
 ﻿using Librarry.Data.Models;
 using Librarry.Data.Services;
+using Librarry.Data.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,11 +20,11 @@ namespace Librarry.Controllers
             _booksService = booksService;
         }
 
-        //[HttpPost("add-book")]
-        //public IActionResult AddBook([FromBody] Book book)
-        //{
-        //    _booksService.AddBook(book);
-        //    return Ok();
-        //}
+        [HttpPost("add-book")]
+        public IActionResult AddBook([FromBody] BookVM book)
+        {
+            _booksService.AddBookWithAuthors(book);
+            return Ok();
+        }
     }
 }

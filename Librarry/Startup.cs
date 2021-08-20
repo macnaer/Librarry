@@ -36,6 +36,7 @@ namespace Librarry
             );
             services.AddTransient<BooksService>();
             services.AddTransient<PublishersService>();
+            services.AddTransient<AuthorsService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Librarry", Version = "v1" });
