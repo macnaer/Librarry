@@ -35,6 +35,7 @@ namespace Librarry
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddTransient<BooksService>();
+            services.AddTransient<PublishersService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Librarry", Version = "v1" });
