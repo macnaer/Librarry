@@ -27,11 +27,52 @@ namespace Librarry.Controllers
             return Ok(allPublishers);
         }
 
+        [HttpGet("get-publisher-by-id/{id}")]
+        public IActionResult GetPublisherById(int id)
+        {
+            var _publisher = _publisherService.GetPublisherById(id);
+            if(_publisher != null)
+            {
+                return Ok(_publisher);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("get-publisher-books-with-authors/{id}")]
+        public IActionResult GetPublisherData(int id)
+        {
+            var _pablosherData = _publisherService.GetPublisherData(id);
+            if(_pablosherData != null)
+            {
+                return Ok(_pablosherData);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher([FromBody] PublisherVM publisher)
         {
             var newPublisher = _publisherService.AddPublisher(publisher);
             return Created(nameof(AddPublisher), newPublisher);
+        }
+
+        [HttpDelete("delete-publisher-by-id/{id}")]
+        public IActionResult DeletePublisherById(int id)
+        {
+            try
+            {
+                _publisherService.DeletePublisherById(id);
+                return Ok();
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
