@@ -26,5 +26,20 @@ namespace Librarry.Controllers
             var newAuthor = _authorService.AddAuthor(author);
             return Created(nameof(AddAuthor), newAuthor);
         }
+
+        [HttpGet("get-author-with-books/{id}")]
+        public IActionResult GetAuthorsWithBooks(int id)
+        {
+            var _author = _authorService.GetAuthorWithBooks(id);
+
+            if(_author != null)
+            {
+                return Ok(_author);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }

@@ -20,11 +20,54 @@ namespace Librarry.Controllers
             _booksService = booksService;
         }
 
+        [HttpGet("get-all-books")]
+        public IActionResult GetAllBooks()
+        {
+            var _allBooks = _booksService.GetAllBooks();
+            return Ok(_allBooks);
+        }
+
+        [HttpGet("get-book-by-id/{id}")]
+        public IActionResult GetBookById(int id)
+        {
+            var _book = _booksService.GetBookById(id);
+            if (_book != null)
+            {
+                return Ok(_book);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPost("add-book")]
         public IActionResult AddBook([FromBody] BookVM book)
         {
             _booksService.AddBookWithAuthors(book);
             return Ok();
+        }
+
+        [HttpPut("update-book-by-id/{id}")]
+        public IActionResult UpdateBuukById(int id, [FromBody] BookVM book)
+        {
+
+            var _book = _booksService.UpdateBookById(id, book);
+            return Ok(_book);
+        }
+
+        [HttpDelete("delete-book-by-id/{id}")]
+        public IActionResult DeleteBookById(int id)
+        {
+            try
+            {
+                _booksService.DeleteBookById(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
