@@ -1,5 +1,6 @@
 using Librarry.Data;
 using Librarry.Data.Services;
+using Librarry.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -58,6 +59,8 @@ namespace Librarry
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.ConfigureCustomExceptionHandler();
 
             app.UseEndpoints(endpoints =>
             {
