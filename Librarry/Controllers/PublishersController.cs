@@ -1,4 +1,5 @@
-﻿using Librarry.Data.Services;
+﻿using Librarry.ActionResults;
+using Librarry.Data.Services;
 using Librarry.Data.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,16 +29,26 @@ namespace Librarry.Controllers
         }
 
         [HttpGet("get-publisher-by-id/{id}")]
-        public IActionResult GetPublisherById(int id)
+        public CustomActionResults GetPublisherById(int id)
         {
             var _publisher = _publisherService.GetPublisherById(id);
             if(_publisher != null)
             {
-                return Ok(_publisher);
+                var _responceObject = new CustomActionResultVM()
+                {
+                    Publisher = _publisher
+                };
+
+                return new CustomActionResults(_responceObject);
             }
             else
             {
-                return NotFound();
+                var _responceObject = new CustomActionResultVM()
+                {
+                    Exception = new Exception("Publisher not found.")
+                };
+
+                return new CustomActionResults(_responceObject);
             }
         }
 
