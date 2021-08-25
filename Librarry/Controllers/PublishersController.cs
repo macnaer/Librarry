@@ -22,7 +22,7 @@ namespace Librarry.Controllers
         }
 
         [HttpGet("get-all-publishers")]
-        public IActionResult GetAllPublishers()
+        public IActionResult GetAllPublishers(string sortBy, string searchString, int pageNumber)
         {
             var allPublishers = _publisherService.GetAllPublishers();
             return Ok(allPublishers);
