@@ -41,7 +41,7 @@ namespace my_books.Data.Services
                 allPublishers = allPublishers.Where(n => n.Name.Contains(searchString, StringComparison.CurrentCultureIgnoreCase)).ToList();
             }
 
-            int pageSize = 5;
+            int pageSize = 6;
             allPublishers = PaginationList<Publisher>.Create(allPublishers.AsQueryable(), pageNumber ?? 1, pageSize);
 
             return allPublishers;
