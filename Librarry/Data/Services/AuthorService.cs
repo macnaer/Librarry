@@ -1,31 +1,28 @@
-﻿using Librarry.Data.Models;
-using Librarry.Data.ViewModels;
+﻿using Book_Store.Data.Models;
+using Book_Store.Data.ViewsModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Data.Services
+namespace Book_Store.Data.Services
 {
-    public class AuthorsService
+    public class AuthorService
     {
-        private readonly AppDbContext _context;
-        public AuthorsService(AppDbContext context)
+        private AppDbContext _context;
+        public AuthorService(AppDbContext context)
         {
             _context = context;
         }
 
-
-        public Author AddAuthor(AuthorVM author)
+        public void AddAuthor(AuthorVM book)
         {
             var _author = new Author()
             {
-                FullName = author.FullName
+                FullName = book.FullName
             };
             _context.Authors.Add(_author);
             _context.SaveChanges();
-
-            return _author;
         }
 
         public AuthorWithBooksVM GetAuthorWithBooks(int authorId)
@@ -38,7 +35,5 @@ namespace Librarry.Data.Services
 
             return _author;
         }
-
-        
     }
 }

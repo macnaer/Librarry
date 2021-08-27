@@ -1,76 +1,93 @@
-﻿using Librarry.ActionResults;
-using Librarry.Data.Services;
-using Librarry.Data.ViewModels;
+﻿using Book_Store.ActionResults;
+using Book_Store.Data.Services;
+using Book_Store.Data.ViewsModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using my_books.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Controllers
+namespace Book_Store.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PublishersController : ControllerBase
     {
-        private readonly PublishersService _publisherService;
+        private PublishersService _publishersService;
+        private readonly ILogger<PublishersController> _logger;
 
-        public PublishersController(PublishersService publishersService)
+        public PublishersController(PublishersService publishersService, ILogger<PublishersController> logger)
         {
-            _publisherService = publishersService;
+            _publishersService = publishersService;
+            _logger = logger;
         }
 
         [HttpGet("get-all-publishers")]
         public IActionResult GetAllPublishers(string sortBy, string searchString, int pageNumber)
         {
-            var allPublishers = _publisherService.GetAllPublishers();
-            return Ok(allPublishers);
-        }
-
-        [HttpGet("get-publisher-by-id/{id}")]
-        public CustomActionResults GetPublisherById(int id)
-        {
-            var _publisher = _publisherService.GetPublisherById(id);
-            if(_publisher != null)
+            try
             {
-                var _responceObject = new CustomActionResultVM()
-                {
-                    Publisher = _publisher
-                };
-
-                return new CustomActionResults(_responceObject);
-            }
-            else
+                //_logger.LogInformation($"Test log: sortBy: {sortBy}");
+                var _result = _publishersService.GetAllPublishers(sortBy, searchString, pageNumber);
+                return Ok(_result);
+            }catch (Exception)
             {
-                var _responceObject = new CustomActionResultVM()
-                {
-                    Exception = new Exception("Publisher not found.")
-                };
+                return BadRequest("Sorry, we could not load publoshers");
+            }
+           
+           
 
-                return new CustomActionResults(_responceObject);
-            }
-        }
-
-        [HttpGet("get-publisher-books-with-authors/{id}")]
-        public IActionResult GetPublisherData(int id)
-        {
-            var _pablosherData = _publisherService.GetPublisherData(id);
-            if(_pablosherData != null)
-            {
-                return Ok(_pablosherData);
-            }
-            else
-            {
-                return NotFound();
-            }
         }
 
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher([FromBody] PublisherVM publisher)
         {
-            var newPublisher = _publisherService.AddPublisher(publisher);
-            return Created(nameof(AddPublisher), newPublisher);
+            try
+            {
+                var newPublisher = _publishersService.AddPublisher(publisher);
+                return Created(nameof(AddPublisher), newPublisher);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("get-publisher-by-id/{id}")]
+        public CustomActionResult GetPublisherById(int id)
+        {
+            var _response = _publishersService.GetPublisherById(id);
+
+
+            if (_response != null)
+            {
+                var _responceObj = new CustomActionResultVM()
+                {
+                    Publisher = _response
+                };
+
+                return new CustomActionResult(_responceObj);
+            }
+            else
+            {
+                var _responceObj = new CustomActionResultVM()
+                {
+                    Exception = new Exception("Publisher not found.")
+                };
+
+                return new CustomActionResult(_responceObj);
+            }
+        }
+
+
+        [HttpGet("get-publisher-books-with-authors/{id}")]
+        public IActionResult GetPublisherData(int id)
+        {
+            var _response = _publishersService.GetPublisherData(id);
+            return Ok(_response);
         }
 
         [HttpDelete("delete-publisher-by-id/{id}")]
@@ -78,9 +95,10 @@ namespace Librarry.Controllers
         {
             try
             {
-                _publisherService.DeletePublisherById(id);
+                _publishersService.DeletePublisherById(id);
                 return Ok();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

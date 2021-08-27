@@ -1,5 +1,5 @@
-﻿using Librarry.Data.Services;
-using Librarry.Data.ViewModels;
+﻿using Book_Store.Data.Services;
+using Book_Store.Data.ViewsModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,39 +7,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Controllers
+namespace Book_Store.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AuthorsController : ControllerBase
     {
-        private  readonly AuthorsService _authorService;
 
-        public AuthorsController(AuthorsService authorsService)
+        private AuthorService _authorsService;
+        public AuthorsController(AuthorService authorsService)
         {
-            _authorService = authorsService;
+            _authorsService = authorsService;
         }
 
         [HttpPost("add-author")]
-        public IActionResult AddAuthor([FromBody] AuthorVM author)
+        public IActionResult AddBook([FromBody] AuthorVM author)
         {
-            var newAuthor = _authorService.AddAuthor(author);
-            return Created(nameof(AddAuthor), newAuthor);
+            Console.WriteLine(author);
+            _authorsService.AddAuthor(author);
+            return Ok();
         }
 
-        [HttpGet("get-author-with-books/{id}")]
-        public IActionResult GetAuthorsWithBooks(int id)
+        [HttpGet("get-author-with-books-by-id/{id}")]
+        public IActionResult GetAuthorWithBooks(int id)
         {
-            var _author = _authorService.GetAuthorWithBooks(id);
-
-            if(_author != null)
-            {
-                return Ok(_author);
-            }
-            else
-            {
-                return NotFound();
-            }
+            var response = _authorsService.GetAuthorWithBooks(id);
+            return Ok(response);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Librarry.Data.ViewModels;
+﻿using Book_Store.Data.ViewsModel;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Librarry.Exceptions
+namespace Book_Store.Exceptions
 {
-
     public class CustomExceptionMiddleware
     {
         private readonly RequestDelegate _next;
@@ -45,5 +44,4 @@ namespace Librarry.Exceptions
             return httpContext.Response.WriteAsync(response.ToString());
         }
     }
-
 }

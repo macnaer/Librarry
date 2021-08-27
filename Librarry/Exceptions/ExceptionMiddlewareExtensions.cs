@@ -1,4 +1,4 @@
-﻿using Librarry.Data.ViewModels;
+﻿using Book_Store.Data.ViewsModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Librarry.Exceptions
+namespace Book_Store.Exceptions
 {
     public static class ExceptionMiddlewareExtensions
     {

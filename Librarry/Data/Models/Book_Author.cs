@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Data.Models
+namespace Book_Store.Data.Models
 {
     public class Book_Author
     {
         public int Id { get; set; }
-        public int BookId { get; set; }
 
+        public int BookId { get; set; }
         public Book Book { get; set; }
+
 
         public int AuthorId { get; set; }
         public Author Author { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Data.ViewModels
+namespace Book_Store.Data.ViewsModel
 {
     public class BookVM
     {
@@ -13,14 +13,13 @@ namespace Librarry.Data.ViewModels
         public DateTime? DateRead { get; set; }
         public int? Rate { get; set; }
         public string Genre { get; set; }
-        public string ImageURL { get; set; }
-        public DateTime DateAdded { get; set; }
+        public string CoverUrl { get; set; }
 
         public int PublisherId { get; set; }
-        public List<int> AuthorsIds { get; set; }
+        public List<int> AuthorIds { get; set; }
     }
 
-    public class BooksWithAuthorsVM
+    public class BookWithAuthorsVM
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -28,10 +27,9 @@ namespace Librarry.Data.ViewModels
         public DateTime? DateRead { get; set; }
         public int? Rate { get; set; }
         public string Genre { get; set; }
-        public string ImageURL { get; set; }
-        public DateTime DateAdded { get; set; }
+        public string CoverUrl { get; set; }
 
         public string PublisherName { get; set; }
-        public List<string> AuthorsNames { get; set; }
+        public List<string> AuthorNames { get; set; }
     }
 }

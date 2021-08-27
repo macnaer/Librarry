@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Data.Models
+namespace Book_Store.Data.Models
 {
     public class Publisher
     {

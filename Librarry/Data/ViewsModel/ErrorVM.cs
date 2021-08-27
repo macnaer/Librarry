@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Data.ViewModels
+namespace Book_Store.Data.ViewsModel
 {
     public class ErrorVM
     {
@@ -17,4 +17,5 @@ namespace Librarry.Data.ViewModels
             return JsonConvert.SerializeObject(this);
         }
     }
+
 }

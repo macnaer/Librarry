@@ -1,12 +1,9 @@
-﻿using Librarry.Data.ViewModels;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
-namespace Librarry.Exceptions
+namespace Book_Store.Exceptions
 {
     public class PublisherNameExceptions
     {

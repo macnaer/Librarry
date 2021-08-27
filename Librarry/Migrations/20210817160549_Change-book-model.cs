@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Librarry.Migrations
+namespace Book_Store.Migrations
 {
-    public partial class ChangeBookmodel : Migration
+    public partial class Changebookmodel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "ImageURL",
+                name: "Genre",
                 table: "Books",
                 type: "nvarchar(max)",
                 nullable: true);
@@ -16,7 +16,7 @@ namespace Librarry.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ImageURL",
+                name: "Genre",
                 table: "Books");
         }
     }

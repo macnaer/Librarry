@@ -1,16 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Librarry.Migrations
+namespace Book_Store.Migrations
 {
-    public partial class Addrelations1 : Migration
+    public partial class Addmanytomanyrelations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "PublisherId",
-                table: "Books",
-                type: "int",
-                nullable: true);
+            migrationBuilder.DropForeignKey(
+                name: "FK_Books_Publisher_PublisherId",
+                table: "Books");
+
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_Publisher",
+                table: "Publisher");
+
+            migrationBuilder.RenameTable(
+                name: "Publisher",
+                newName: "Publishers");
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_Publishers",
+                table: "Publishers",
+                column: "Id");
 
             migrationBuilder.CreateTable(
                 name: "Authors",
@@ -26,20 +37,7 @@ namespace Librarry.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Publishers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Publishers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Book_Authors",
+                name: "Books_Authors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -49,15 +47,15 @@ namespace Librarry.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book_Authors", x => x.Id);
+                    table.PrimaryKey("PK_Books_Authors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Book_Authors_Authors_AuthorId",
+                        name: "FK_Books_Authors_Authors_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Authors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Book_Authors_Books_BookId",
+                        name: "FK_Books_Authors_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
@@ -65,18 +63,13 @@ namespace Librarry.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_PublisherId",
-                table: "Books",
-                column: "PublisherId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Book_Authors_AuthorId",
-                table: "Book_Authors",
+                name: "IX_Books_Authors_AuthorId",
+                table: "Books_Authors",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_Authors_BookId",
-                table: "Book_Authors",
+                name: "IX_Books_Authors_BookId",
+                table: "Books_Authors",
                 column: "BookId");
 
             migrationBuilder.AddForeignKey(
@@ -85,7 +78,7 @@ namespace Librarry.Migrations
                 column: "PublisherId",
                 principalTable: "Publishers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -95,21 +88,31 @@ namespace Librarry.Migrations
                 table: "Books");
 
             migrationBuilder.DropTable(
-                name: "Book_Authors");
-
-            migrationBuilder.DropTable(
-                name: "Publishers");
+                name: "Books_Authors");
 
             migrationBuilder.DropTable(
                 name: "Authors");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Books_PublisherId",
-                table: "Books");
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_Publishers",
+                table: "Publishers");
 
-            migrationBuilder.DropColumn(
-                name: "PublisherId",
-                table: "Books");
+            migrationBuilder.RenameTable(
+                name: "Publishers",
+                newName: "Publisher");
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_Publisher",
+                table: "Publisher",
+                column: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Books_Publisher_PublisherId",
+                table: "Books",
+                column: "PublisherId",
+                principalTable: "Publisher",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
     }
 }

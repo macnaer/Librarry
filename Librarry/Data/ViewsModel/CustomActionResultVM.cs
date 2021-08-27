@@ -1,10 +1,10 @@
-﻿using Librarry.Data.Models;
+﻿using Book_Store.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Data.ViewModels
+namespace Book_Store.Data.ViewsModel
 {
     public class CustomActionResultVM
     {

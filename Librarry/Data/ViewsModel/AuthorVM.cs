@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Data.ViewModels
+namespace Book_Store.Data.ViewsModel
 {
     public class AuthorVM
     {
@@ -13,6 +13,6 @@ namespace Librarry.Data.ViewModels
     public class AuthorWithBooksVM
     {
         public string FullName { get; set; }
-        public List<string> BookTitles { get; set; } 
+        public List<string> BookTitles { get; set; }
     }
 }

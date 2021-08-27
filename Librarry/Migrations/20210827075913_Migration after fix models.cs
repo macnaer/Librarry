@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Librarry.Migrations
+namespace Book_Store.Migrations
 {
-    public partial class Addrelations : Migration
+    public partial class Migrationafterfixmodels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

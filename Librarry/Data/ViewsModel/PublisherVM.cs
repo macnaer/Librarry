@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Librarry.Data.ViewModels
+namespace Book_Store.Data.ViewsModel
 {
     public class PublisherVM
     {
         public string Name { get; set; }
     }
 
-    public class PublisherWithBooksAndAuthotsVM
+    public class PublisherWithBooksAndAuthorsVM
     {
         public string Name { get; set; }
+
         public List<BookAuthorVM> BookAuthors { get; set; }
     }
 
@@ -21,6 +21,4 @@ namespace Librarry.Data.ViewModels
         public string BookName { get; set; }
         public List<string> BookAuthors { get; set; }
     }
-
-
 }
